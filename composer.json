@@ -25,7 +25,13 @@
         "mdmsoft/yii2-gii": "~1.0",
         "mdmsoft/yii2-admin": "~3.0",
         "dmstr/yii2-adminlte-asset": "2.*",
-        "nenad/yii2-password-strength": "*"
+        "nenad/yii2-password-strength": "*",
+        "yiisoft/yii2-jui": "^2.0",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-export": "*",
+        "kartik-v/yii2-mpdf": "*",
+        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-helpers": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
