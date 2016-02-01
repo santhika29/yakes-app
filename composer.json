@@ -31,7 +31,9 @@
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-mpdf": "*",
         "kartik-v/yii2-widgets": "*",
-        "kartik-v/yii2-helpers": "*"
+        "kartik-v/yii2-helpers": "*",
+        "empathy/yii2-datetime-compare": "^2.2",
+        "kartik-v/yii2-datecontrol": "^1.9"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

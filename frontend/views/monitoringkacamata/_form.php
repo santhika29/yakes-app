@@ -64,13 +64,15 @@ use kartik\widgets\Select2;
             ]); 
         ?>
 
-        <?= $form->field($model, 'tgl_ambil')->widget(\kartik\widgets\DatePicker::classname(), [
-            'options' => ['placeholder' => 'Choose Tanggal Pengambilan'],
-            'type' => \kartik\widgets\DatePicker::TYPE_COMPONENT_APPEND,
-            'pluginOptions' => [
-                'autoclose' => true,
-                'format' => 'dd-M-yyyy'
+        <?= $form->field($model, 'tgl_ambil')->widget(\kartik\datecontrol\DateControl::classname(), [
+            'type'=>\kartik\datecontrol\DateControl::FORMAT_DATE,
+            'ajaxConversion'=>false,
+            'options' => [
+                'pluginOptions' => [
+                    'autoclose' => true
+                ]
             ]
+
         ]); ?>
 
 

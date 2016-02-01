@@ -5,6 +5,7 @@ namespace frontend\models;
 use Yii;
 use backend\models\HakKacamata;
 use backend\models\Peserta;
+use Empathy\Validators\DateTimeCompareValidator;
 
 /**
  * This is the model class for table "monitoring_kacamata".
@@ -41,8 +42,15 @@ class MonitoringKacamata extends \yii\db\ActiveRecord
             [['hak_kacamata_id', 'created_by', 'updated_by'], 'integer'],
             [['tgl_ambil', 'created_at', 'updated_at'], 'safe'],
             [['nikkes'], 'string', 'max' => 10],
-            [['hak_kacamata_id'], 'exist', 'skipOnError' => true, 'targetClass' => HakKacamata::className(), 'targetAttribute' => ['hak_kacamata_id' => 'id']],
-            [['nikkes'], 'exist', 'skipOnError' => true, 'targetClass' => Peserta::className(), 'targetAttribute' => ['nikkes' => 'nikkes']],
+            [['hak_kacamata_id'], 'exist', 
+                'skipOnError' => true, 
+                'targetClass' => HakKacamata::className(), 
+                'targetAttribute' => ['hak_kacamata_id' => 'id']],
+            [['nikkes'], 'exist', 
+                'skipOnError' => true, 
+                'targetClass' => Peserta::className(), 
+                'targetAttribute' => ['nikkes' => 'nikkes']],
+            ['tgl_ambil',DateTimeCompareValidator::className(), 'compareValue' => date('Y-m-d'), 'operator' => '<='],
         ];
     }
 
@@ -55,11 +63,29 @@ class MonitoringKacamata extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nikkes' => 'Nikkes',
             'hak_kacamata_id' => 'Hak Kacamata ID',
-            'tgl_ambil' => 'Tgl Ambil',
+            'tgl_ambil' => 'Tanggal Pengambilan',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
+
+            'nikkes0' => 'Nama',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'timestamp' =>[
+                'class' => \yii\behaviors\TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new \yii\db\Expression('NOW()'),
+            ],
+            'blameable' => [
+                'class' => \yii\behaviors\BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+            ]
         ];
     }
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5292ecbc43929532e03fbcd2985852a3",
-    "content-hash": "cd1ee2b4a54d58b349ed8ee97182ca28",
+    "hash": "d3460235e6bafee4187bd910a94a5fa3",
+    "content-hash": "2e268b25502a4b45cc8f7073f4a95ad8",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -437,6 +437,43 @@
             ]
         },
         {
+            "name": "bower-asset/moment",
+            "version": "2.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moment/moment.git",
+                "reference": "d731fe7e2678e585ae66cbe86033d1890688ef40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moment/moment/zipball/d731fe7e2678e585ae66cbe86033d1890688ef40",
+                "reference": "d731fe7e2678e585ae66cbe86033d1890688ef40",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "moment.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "benchmarks",
+                    "bower_components",
+                    "meteor",
+                    "node_modules",
+                    "scripts",
+                    "tasks",
+                    "test",
+                    "component.json",
+                    "composer.json",
+                    "CONTRIBUTING.md",
+                    "ender.js",
+                    "Gruntfile.js",
+                    "Moment.js.nuspec",
+                    "package.js",
+                    "package.json"
+                ]
+            }
+        },
+        {
             "name": "bower-asset/punycode",
             "version": "v1.3.2",
             "source": {
@@ -786,6 +823,51 @@
             "time": "2015-11-06 10:35:36"
         },
         {
+            "name": "empathy/yii2-datetime-compare",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/empathy/yii2-datetime-compare.git",
+                "reference": "11839526e925ed01ac4053f8cfe89cbacf91b50b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/empathy/yii2-datetime-compare/zipball/11839526e925ed01ac4053f8cfe89cbacf91b50b",
+                "reference": "11839526e925ed01ac4053f8cfe89cbacf91b50b",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/moment": "^2.11"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "Empathy\\Validators\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Anushan Easwaramoorthy",
+                    "email": "EAnushan@hotmail.com"
+                }
+            ],
+            "description": "DateTime comparison validator",
+            "homepage": "https://github.com/empathy/yii2-datetime-compare",
+            "keywords": [
+                "datetime",
+                "extension",
+                "form",
+                "plugin",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-01-22 17:32:53"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.6.0",
             "source": {
@@ -1014,6 +1096,97 @@
             "time": "2015-12-14 10:18:58"
         },
         {
+            "name": "kartik-v/php-date-formatter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/php-date-formatter.git",
+                "reference": "38984fb614f3ebc3605a8e369eee1406feea02a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/php-date-formatter/zipball/38984fb614f3ebc3605a8e369eee1406feea02a4",
+                "reference": "38984fb614f3ebc3605a8e369eee1406feea02a4",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\dateformatter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A Javascript datetime formatting and manipulation library using PHP date-time formats.",
+            "homepage": "https://github.com/kartik-v/php-date-formatter",
+            "keywords": [
+                "date",
+                "datetime",
+                "formatter",
+                "javascript",
+                "php",
+                "php-date-formatter.js",
+                "time"
+            ],
+            "time": "2015-12-21 18:22:51"
+        },
+        {
+            "name": "kartik-v/yii2-datecontrol",
+            "version": "v1.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-datecontrol.git",
+                "reference": "ab4ab5dec33db2790ca6d3da6788b2ae339efa3c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-datecontrol/zipball/ab4ab5dec33db2790ca6d3da6788b2ae339efa3c",
+                "reference": "ab4ab5dec33db2790ca6d3da6788b2ae339efa3c",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/php-date-formatter": ">1.3",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\datecontrol\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Date control module allowing separation of formats for View and Model for Yii Framework 2.0",
+            "homepage": "https://github.com/kartik-v/yii2-datecontrol",
+            "keywords": [
+                "control",
+                "date",
+                "extension",
+                "format",
+                "yii",
+                "yii2"
+            ],
+            "time": "2015-07-19 05:01:43"
+        },
+        {
             "name": "kartik-v/yii2-export",
             "version": "dev-master",
             "source": {
@@ -1077,7 +1250,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/8cf8bb9ef3e9dc94933c54fcffdc91471de40ecf",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/ea7bd283f086b06bec2f5705f642855cfca9088e",
                 "reference": "8cf8bb9ef3e9dc94933c54fcffdc91471de40ecf",
                 "shasum": ""
             },
@@ -2658,7 +2831,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/c1c502ff2b792fac5470356373e243b77d2a36c7",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/7ccbfdf4cfb0ce025e27455dc3e516af23eb2800",
                 "reference": "e4359f68b70caede1e09ecefb56e9435f7d140af",
                 "shasum": ""
             },

@@ -37,7 +37,16 @@
                         'icon' => 'fa fa-cubes', 
                         'url' =>'#',
                         'items' => [
-                            ['label' => 'Kacamata', 'icon' => 'fa fa-file-code-o', 'url' => 'monitoringkacamata',],
+                            ['label' => 'Kacamata', 'icon' => 'fa fa-file-code-o', 'url' => ['/monitoringkacamata']],
+                        ]
+                    ],
+                    [
+                        'label' => 'Informasi', 
+                        'icon' => 'fa fa-info', 
+                        'url' =>'#',
+                        'items' => [
+                            ['label' => 'Hak Kacamata', 'icon' => 'fa fa-laptop', 'url' => ['#']],
+                            ['label' => 'Peserta', 'icon' => 'fa fa-users', 'url' => ['#']],
                         ]
                     ],
                 ],

@@ -17,6 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'pjax' => true,
         'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
+        'autoXlFormat'=>true,
+        'export'=>[
+            'fontAwesome'=>true,
+            'showConfirmAlert'=>false,
+            'target'=>GridView::TARGET_BLANK
+        ],
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
@@ -74,7 +80,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]).''.
                 Html::a('<i class="fa fa-repeat"></i>',['/monitoringkacamata'],['data-pjax' => 0, 'class' => 'btn btn-default', 'title' => 'Reset'])
             ],
-            //'{toggleData}',
+            '{toggleData}',
+            '{export}'
         ],
         'hover' => true,
         'bordered' => true,
