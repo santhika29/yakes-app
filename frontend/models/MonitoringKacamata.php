@@ -42,13 +42,13 @@ class MonitoringKacamata extends \yii\db\ActiveRecord
             [['hak_kacamata_id', 'created_by', 'updated_by'], 'integer'],
             [['tgl_ambil', 'created_at', 'updated_at'], 'safe'],
             [['nikkes'], 'string', 'max' => 10],
-            [['hak_kacamata_id'], 'exist', 
-                'skipOnError' => true, 
-                'targetClass' => HakKacamata::className(), 
+            [['hak_kacamata_id'], 'exist',
+                'skipOnError' => true,
+                'targetClass' => HakKacamata::className(),
                 'targetAttribute' => ['hak_kacamata_id' => 'id']],
-            [['nikkes'], 'exist', 
-                'skipOnError' => true, 
-                'targetClass' => Peserta::className(), 
+            [['nikkes'], 'exist',
+                'skipOnError' => true,
+                'targetClass' => Peserta::className(),
                 'targetAttribute' => ['nikkes' => 'nikkes']],
             ['tgl_ambil',DateTimeCompareValidator::className(), 'compareValue' => date('Y-m-d'), 'operator' => '<='],
         ];
@@ -69,7 +69,7 @@ class MonitoringKacamata extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
 
-            'nikkes0' => 'Nama',
+            'nikkes0.nama' => 'Nama',
         ];
     }
 

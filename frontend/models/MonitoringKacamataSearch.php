@@ -13,14 +13,18 @@ use yii\helpers\ArrayHelper;
  */
 class MonitoringKacamataSearch extends monitoringkacamata
 {
+
+    public $nikkes0;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'hak_kacamata_id', 'created_by', 'updated_by'], 'integer'],
-            [['nikkes', 'tgl_ambil', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'hak_kacamata_id'], 'integer'],
+            [['nikkes', 'tgl_ambil'], 'safe'],
+            //rules tambahan
+            [['nikkes0'],'safe']
         ];
     }
 
@@ -42,11 +46,18 @@ class MonitoringKacamataSearch extends monitoringkacamata
      */
     public function search($params)
     {
-        $query = monitoringkacamata::find();
+        $query = monitoringkacamata::find()->orderBy("tgl_ambil DESC");
+
+        $query->joinWith(['nikkes0']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['nikkes0'] = [
+            'asc' => ['peserta.nama' => SORT_ASC],
+            'desc' => ['peserta.nama' => SORT_DESC],
+        ];
 
         $this->load($params);
         if (!$this->validate()) {
@@ -58,13 +69,10 @@ class MonitoringKacamataSearch extends monitoringkacamata
             'id' => $this->id,
             'hak_kacamata_id' => $this->hak_kacamata_id,
             'tgl_ambil' => $this->tgl_ambil,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
         ]);
 
-        $query->andFilterWhere(['like', 'nikkes', $this->nikkes]);
+        $query->andFilterWhere(['like', 'monitoring_kacamata.nikkes', $this->nikkes])
+              ->andFilterWhere(['like','peserta.nama',$this->nikkes0]);
 
         return $dataProvider;
     }

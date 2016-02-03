@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use backend\models\Peserta;
 use backend\models\search\PesertaSearch;
 use backend\models\PlafonKacamata;
+use frontend\models\MonitoringKacamata;
 use yii\helpers\Json;
 use yii\db\Query;
 
@@ -27,7 +28,7 @@ class CaripesertaController extends \yii\web\Controller
 
     	$query -> select('nikkes')
     		   -> from('peserta')
-    		   -> where('nikkes LIKE "%' . $q .'%"')
+    		   -> where('nikkes LIKE "' . $q .'%"')
     		   -> orderby('nikkes');
 
     	$command = $query->createCommand();
@@ -49,6 +50,27 @@ class CaripesertaController extends \yii\web\Controller
                     ->andWhere(['status_peserta_id'=>$status_peserta_id])
                     ->one();
         echo Json::encode($dataPlafon);
+    }
+
+    public function actionGetLastDate($nikkes)
+    {
+      $query = new Query;
+
+      $query -> select('tgl_ambil')
+    		   -> from('monitoring_kacamata')
+    		   -> where('nikkes LIKE "' . $nikkes .'%"')
+    		   -> orderby('tgl_ambil desc')
+           -> one();
+
+    	$command = $query->createCommand();
+    	$data = $command->queryAll();
+
+    	foreach ($data as $d) {
+    		# code...
+    		$out[] = ['value' => $d['tgl_ambil']];
+    	}
+
+    	echo Json::encode($out);
     }
 
 }

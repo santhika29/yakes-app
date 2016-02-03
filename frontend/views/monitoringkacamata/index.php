@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\Html;
+use kartik\helpers\Html;
 use kartik\grid\GridView;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\MonitoringKacamataSearch */
@@ -16,18 +17,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,
-        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
-        'autoXlFormat'=>true,
-        'export'=>[
-            'fontAwesome'=>true,
-            'showConfirmAlert'=>false,
-            'target'=>GridView::TARGET_BLANK
+        'containerOptions'=>['style'=>'overflow: auto'],
+        'floatHeader' => true,
+        'floatHeaderOptions' => ['top' => 50,],
+        'pager' => [
+            'firstPageLabel'=>'First',
+            'lastPageLabel'=>'Last'
         ],
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
             //'id',
-            'nikkes',
+            [
+               'attribute' => 'nikkes',
+               'width' => '15%',
+            ],
+            [
+                'attribute' => 'nikkes0',
+                'value' => 'nikkes0.nama',
+                'label' => 'Nama',
+            ],
             [
                 'attribute' => 'hak_kacamata_id',
                 'label' => 'Hak Kacamata',
@@ -47,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Tanggal Pengambilan',
                 'filterType' => GridView::FILTER_DATE,
                 'filterWidgetOptions' => [
-                    'options' => ['placeholder' => 'Enter date ...'], 
+                    'options' => ['placeholder' => 'Enter date ...'],
                     'type' => \kartik\widgets\DatePicker::TYPE_COMPONENT_APPEND,
                     'removeButton' => false,
                     'pluginOptions' => [
@@ -63,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'created_by',
             // 'updated_by',
 
-            ['class' => 'kartik\grid\ActionColumn'],
+            //['class' => 'kartik\grid\ActionColumn'],
         ],
         'panel'=>[
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-large"></i> Monitoring Kacamata</h3>',
@@ -73,15 +82,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'toolbar' => [
             ['content' =>
                 Html::button('<i class="fa fa-plus"></i>',[
-                    'type' => 'button', 
+                    'type' => 'button',
                     'title' => 'Add Monitoring Kacamata',
                     'class' => 'btn btn-success',
                     'onClick' => 'location.href=window.location.href + "/create"',
                     ]).''.
                 Html::a('<i class="fa fa-repeat"></i>',['/monitoringkacamata'],['data-pjax' => 0, 'class' => 'btn btn-default', 'title' => 'Reset'])
             ],
-            '{toggleData}',
-            '{export}'
+            //'{toggleData}'
         ],
         'hover' => true,
         'bordered' => true,

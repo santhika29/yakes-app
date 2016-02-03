@@ -17,15 +17,15 @@ use kartik\widgets\Select2;
 <div class="monitoringkacamata-form">
     <div class="col-md-6">
         <?php $form = ActiveForm::begin(); ?>
-        
+
         <?= $form->errorSummary($model); ?>
 
         <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
-        <?php 
-            
+        <?php
+
             $template = '<div><p class="nikkes">{{value}}</p></div>';
-            
+
             echo $form->field($model, 'nikkes')->widget(Typeahead::classname(), [
                     'options' => ['placeholder' => 'Ketik NIKKES yang diinginkan'],
                     'pluginOptions' => ['highlight' => true],
@@ -46,11 +46,11 @@ use kartik\widgets\Select2;
                     ],
                 ]);
         ?>
-        
 
-        
 
-        <?php 
+
+
+        <?php
             echo $form->field($model, 'hak_kacamata_id')->widget(Select2::classname(), [
                 'data' => \frontend\models\MonitoringKacamataSearch::getHakKacamataList(),
                 'options' => [
@@ -61,7 +61,7 @@ use kartik\widgets\Select2;
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
-            ]); 
+            ]);
         ?>
 
         <?= $form->field($model, 'tgl_ambil')->widget(\kartik\datecontrol\DateControl::classname(), [
@@ -86,7 +86,7 @@ use kartik\widgets\Select2;
     <div class="col-md-4">
         <div class="box box-info" style="display:none" id="panel">
              <div class="box-header with-border">
-             <h3 class="box-title">Data Peserta</h3>                 
+             <h3 class="box-title">Data Peserta</h3>
              </div>
              <div class="box-body" id='panel-body'></div>
         </div>
@@ -102,14 +102,14 @@ var nama,band,status;
 $('#monitoringkacamata-nikkes').keydown(function(e){
     if (e.keyCode == 9 )
     {
-        
+
         e.preventDefault();
 
         var panjang = $('#monitoringkacamata-nikkes').val().length;
             if (panjang==10)
             {
                 var nikkes = $(this).val();
-                
+
                 $.get('../caripeserta/get-data-peserta',{nikkes:nikkes},function(data){
                     var data = $.parseJSON(data);
                     if (!(jQuery.isEmptyObject(data)))
@@ -133,11 +133,19 @@ $('#monitoringkacamata-nikkes').keydown(function(e){
                             "</p><br><p> Status : "+ data.status_peserta_id +"</p>";
                     };
                 });
+                //cek tanggal terakhir pengambilan kacamata
+                $.get('../caripeserta/get-last-date',{nikkes:nikkes},function(data){
+                  var data = $.parseJSON(data);
+                  if(!(jQuery.isEmptyObject(data)))
+                  {
+
+                  };
+                });
             }
     }
 });
 $('#monitoringkacamata-hak_kacamata_id').change(function(){
-    
+
     var hak_kacamata_id = $(this).val();
     //var band = document.getElementById('band').value;
 
