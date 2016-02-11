@@ -13,7 +13,6 @@ use kartik\widgets\Select2;
 
 ?>
 
-
 <div class="monitoringkacamata-form">
     <div class="col-md-6">
         <?php $form = ActiveForm::begin(); ?>
@@ -38,17 +37,14 @@ use kartik\widgets\Select2;
                                 'suggestion' => new JsExpression("Handlebars.compile('{$template}')"),
                             ],
                             'remote' => [
-                                'url' => Url::to(['caripeserta/get-nikkes-list']).'?q=%QUERY',
-                                'wildcard' => '%QUERY'
+                                'url' => Url::to(['caripeserta/get-nikkes-list']).'?q=%QUERY%',
+                                'wildcard' => '%QUERY%'
                             ],
                             'limit' => 10,
                         ]
                     ],
                 ]);
         ?>
-
-
-
 
         <?php
             echo $form->field($model, 'hak_kacamata_id')->widget(Select2::classname(), [
@@ -70,7 +66,8 @@ use kartik\widgets\Select2;
             'options' => [
                 'pluginOptions' => [
                     'autoclose' => true
-                ]
+                ],
+                'disabled' => true,
             ]
 
         ]); ?>
@@ -88,7 +85,9 @@ use kartik\widgets\Select2;
              <div class="box-header with-border">
              <h3 class="box-title">Data Peserta</h3>
              </div>
-             <div class="box-body" id='panel-body'></div>
+             <div class="box-body" id='panel-body'>
+
+             </div>
         </div>
     </div>
 </div>
@@ -97,7 +96,10 @@ use kartik\widgets\Select2;
 <?php
 $script = <<< JS
 //here the place for the JS
-var nama,band,status;
+var nama,band,status,tgl_ambil;
+
+
+
 
 $('#monitoringkacamata-nikkes').keydown(function(e){
     if (e.keyCode == 9 )
@@ -114,31 +116,65 @@ $('#monitoringkacamata-nikkes').keydown(function(e){
                     var data = $.parseJSON(data);
                     if (!(jQuery.isEmptyObject(data)))
                     {
-                        //$('#nama').attr('value',data.nama);
-                        //$('#band').attr('value',data.band);
-                        //$('#status').attr('value',data.status_peserta_id);
+                        nama = data.nama;
                         band = data.band;
                         status = data.status_peserta_id;
-                        $('#monitoringkacamata-hak_kacamata_id').prop('disabled', false);;
-                        $('#monitoringkacamata-hak_kacamata_id').focus();
+                        var sts;
+                        switch (status) {
+                            case 1:
+                                sts = "Pegawai";
+                                break;
+                            case 2:
+                                sts = "Pensiun";
+                                break;
+                            case 3:
+                                sts = "Keluarga";
+                                break;
+                        }
+
                         $('#panel').animate({
                             left: "+=50",
                             height: "toggle"
-                            }, 500, function() {
+                        }, 100, function() {
                             // Animation complete.
                           });
                         var headingDiv = document.getElementById('panel-body');
-                        headingDiv.innerHTML = "<p> Nama : " + data.nama +
-                            "</p><br><p> Band : "+ data.band +
-                            "</p><br><p> Status : "+ data.status_peserta_id +"</p>";
+                        headingDiv.innerHTML = "<p> Nama : " + nama +
+                            "</p><br><p> Band : "+ band +
+                            "</p><br><p> Status : "+ sts +"</p><br>";
                     };
                 });
                 //cek tanggal terakhir pengambilan kacamata
-                $.get('../caripeserta/get-last-date',{nikkes:nikkes},function(data){
-                  var data = $.parseJSON(data);
-                  if(!(jQuery.isEmptyObject(data)))
+                $.get('../caripeserta/get-last-date',{nikkes:nikkes},function(datax){
+                  var datax = $.parseJSON(datax);
+                  if(!(jQuery.isEmptyObject(datax)))
                   {
+                      var headingDiv = document.getElementById('panel-body');
+                      headingDiv.innerHTML += "<table id='myTable' class='table table table-bordered'><tr><th>Tanggal Pengambilan</th><th>Durasi</th><th>Hak</th></</tr></table>";
 
+                      $.each(datax, function (i, data)
+                      {
+                          tgl_ambil = data.tgl_ambil;
+                          var x = moment(tgl_ambil);
+                          var tgl = moment();
+                          var table = document.getElementById("myTable");
+                          var row = table.insertRow(-1);
+                          var cell1 = row.insertCell(0);
+                          var cell2 = row.insertCell(1);
+                          var cell3 = row.insertCell(2);
+                          cell1.innerHTML = tgl_ambil;
+                          cell2.innerHTML = tgl.diff(x,"months");
+                          cell3.innerHTML = (data.hak == 1) ? "<code>Lengkap</code>" : "<code>Lensa</code>" ;
+                      });
+
+                  }
+                  else {
+                      tgl_ambil = 0;
+                      var headingDiv = document.getElementById('panel-body');
+                      headingDiv.innerHTML += "<p> Tanggal Pengambilan Terakhir : Tidak Tercatat </p><br>";
+                      $('#monitoringkacamata-hak_kacamata_id').prop('disabled', false);
+                      $('#monitoringkacamata-tgl_ambil-disp').prop('disabled', false);
+                      $('#monitoringkacamata-hak_kacamata_id').focus();
                   };
                 });
             }
@@ -156,7 +192,7 @@ $('#monitoringkacamata-hak_kacamata_id').change(function(){
             {
                 //$('#hak').attr('value',data.biaya);
                 var headingDiv = document.getElementById('panel-body');
-                        headingDiv.innerHTML += "<br><p> Plafond : " + data.biaya +"</p>";
+                        headingDiv.innerHTML += "<p> Plafond : " + data.biaya +"</p>";
             };
         });
 });

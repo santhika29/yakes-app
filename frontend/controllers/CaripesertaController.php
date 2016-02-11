@@ -34,12 +34,14 @@ class CaripesertaController extends \yii\web\Controller
     	$command = $query->createCommand();
     	$data = $command->queryAll();
 
+        //$out = "";
     	foreach ($data as $d) {
     		# code...
     		$out[] = ['value' => $d['nikkes']];
     	}
 
-    	echo Json::encode($out);
+    	//echo Json::encode((!empty($out)? $out : null));
+        echo Json::encode($out);
     }
 
     public function actionGetDataPlafon($hak_kacamata_id,$band = null ,$status_peserta_id = null)
@@ -54,23 +56,26 @@ class CaripesertaController extends \yii\web\Controller
 
     public function actionGetLastDate($nikkes)
     {
-      $query = new Query;
+        
+        $query = new Query;
 
-      $query -> select('tgl_ambil')
+    	$query -> select('*')
     		   -> from('monitoring_kacamata')
-    		   -> where('nikkes LIKE "' . $nikkes .'%"')
-    		   -> orderby('tgl_ambil desc')
-           -> one();
+    		   -> where('nikkes LIKE "' . $nikkes .'"')
+    		   -> orderby('tgl_ambil DESC')
+               -> limit(3);
 
     	$command = $query->createCommand();
     	$data = $command->queryAll();
 
+        //$out = "";
     	foreach ($data as $d) {
     		# code...
-    		$out[] = ['value' => $d['tgl_ambil']];
+    		$out[] = ['nikkes' => $d['nikkes'],'tgl_ambil' => $d['tgl_ambil'],'hak' => $d['hak_kacamata_id']];
     	}
 
-    	echo Json::encode($out);
+    	echo Json::encode((!empty($out)? $out : null));
+        //echo Json::encode($out);
     }
 
 }
