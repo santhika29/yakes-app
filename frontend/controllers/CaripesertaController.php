@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use backend\models\Peserta;
-use backend\models\search\PesertaSearch;
 use backend\models\PlafonKacamata;
 use frontend\models\MonitoringKacamata;
 use yii\helpers\Json;
@@ -56,7 +55,7 @@ class CaripesertaController extends \yii\web\Controller
 
     public function actionGetLastDate($nikkes)
     {
-        
+
         $query = new Query;
 
     	$query -> select('*')

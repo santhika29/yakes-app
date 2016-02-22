@@ -1,0 +1,8 @@
+if (tgl.diff(x,"months")<12) {
+               $('#monitoringkacamata-hak_kacamata_id').prop('disabled', true);
+               $('#monitoringkacamata-hak_kacamata_id').val('3').trigger("change");
+           }
+
+
+                        var headingDiv = document.getElementById('myTable');
+                        headingDiv.innerHTML += "<p> Tanggal Pengambilan Terakhir : " + tgl_ambil + "</p><br> Terhitung " + tgl.diff(x,"months") +" bulan yang lalu";

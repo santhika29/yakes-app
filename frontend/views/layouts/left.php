@@ -2,7 +2,7 @@
 
     <section class="sidebar">
 
-        <!-- Sidebar user panel 
+        <!-- Sidebar user panel
         <div class="user-panel">
             <div class="pull-left image">
                 <img src="<?= $directoryAsset ?>/img/avatar5-160x160.jpg" class="img-circle" alt="User Image"/>
@@ -33,20 +33,20 @@
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
                     ['label' => 'Home', 'icon' => 'fa fa-home', 'url' => ['/']],
                     [
-                        'label' => 'Monitoring', 
-                        'icon' => 'fa fa-cubes', 
+                        'label' => 'Monitoring',
+                        'icon' => 'fa fa-cubes',
                         'url' =>'#',
                         'items' => [
                             ['label' => 'Kacamata', 'icon' => 'fa fa-file-code-o', 'url' => ['/monitoringkacamata']],
                         ]
                     ],
                     [
-                        'label' => 'Informasi', 
-                        'icon' => 'fa fa-info', 
+                        'label' => 'Informasi',
+                        'icon' => 'fa fa-info',
                         'url' =>'#',
                         'items' => [
                             ['label' => 'Hak Kacamata', 'icon' => 'fa fa-laptop', 'url' => ['#']],
-                            ['label' => 'Peserta', 'icon' => 'fa fa-users', 'url' => ['#']],
+                            ['label' => 'Peserta', 'icon' => 'fa fa-users', 'url' => ['/master-kk']],
                         ]
                     ],
                 ],
